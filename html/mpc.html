@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Dash.js Rocks</title>
+    </head>
+    <body>
+        <div>
+            <video id="videoPlayer"  width="640px" height="360px" autoplay muted controls></video>
+        </div>
+        <script src="./js/dash.all.min.js"></script>
+        <script src="./js/MPCRule.js"></script>
+        <script src="./js/debugout.js"></script>
+        <script>
+            (function(){
+                var url = "http://192.168.100.35:5005/ccc.mpd";
+                var player = dashjs.MediaPlayer().create();
+		player.updateSettings({
+                'streaming': {
+                    'abr': {
+                        'useDefaultABRRules': false
+                    }
+                }
+            });
+                player.addABRCustomRule('qualitySwitchRules', 'MPC', MPC);
+                player.initialize(document.querySelector("#videoPlayer"), url, true);
+                //var videoPlayer = document.getElementById("videoPlayer");
+                //videoPlayer.muted = false
+                //videoPlayer.play();
+            })();
+           // window.onload = function () {
+           //     var videoPlayer = document.getElementById("videoPlayer");
+           //     videoPlayer.muted = false
+           //     videoPlayer.play();
+           // }
+        </script>
+    </body>
+</html>
